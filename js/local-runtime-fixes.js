@@ -160,6 +160,26 @@
         const isMusicTrack = /^\/api\/music-tracks(?:\/[^/]+)?$/.test(remoteUrl.pathname);
         const method = String(arguments[1]?.method || (input instanceof Request && input.method) || "GET").toUpperCase();
 
+        if ((isGitHubPages || isFileOrigin) && isMusicTrack && method === "GET") {
+          const track = {
+            id: "romantic-013",
+            title: "Lễ Đường",
+            artist: "Kai Đinh",
+            duration: 249,
+            url: "https://cdn.chungdoi.com/music/le-duong.mp3",
+            tags: ["wedding", "vietnamese"],
+            status: "ready",
+            youtubeUrl: null,
+            submittedBy: null,
+            errorMessage: null,
+            market: "vn",
+            reviewedAt: null,
+            addedAt: "2026-01-01T00:00:00.000Z"
+          };
+          const requestedTrackId = remoteUrl.pathname.split("/").pop();
+          return jsonResponse(requestedTrackId === "music-tracks" ? { tracks: [track] } : { track });
+        }
+
         if (appsScriptUrl && isComments && method === "GET") {
           return jsonResponse(await loadSheetComments(remoteUrl.pathname.split("/")[3]));
         }
