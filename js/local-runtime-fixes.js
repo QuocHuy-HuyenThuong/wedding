@@ -2,7 +2,8 @@
   window.WEDDING_APPS_SCRIPT_URL = window.WEDDING_APPS_SCRIPT_URL
     || "https://script.google.com/macros/s/AKfycbzpj9AvSODBw-0a3VhsDMCU4vCAWwsa4ZU6wzIhXwSEzgCmNfvYdmb2Jm6HyC5aduhdAg/exec";
   const isFileOrigin = window.location.protocol === "file:";
-  const isLocalServer = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+  const isGitHubPages = window.location.hostname.endsWith(".github.io");
+  const isLocalServer = ["localhost", "127.0.0.1"].includes(window.location.hostname) || isGitHubPages;
   const appsScriptUrl = String(window.WEDDING_APPS_SCRIPT_URL || "").trim();
   const invitationSlug = String(window.WEDDING_INVITATION_SLUG || "quochuy-thithuong");
   if (isFileOrigin) {
